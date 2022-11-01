@@ -1,7 +1,8 @@
 import axios from "axios";
 
+const BASE_URL = "https://book-store-yt.vercel.app";
 export const getAllBooks = async () => {
-  const res = await axios.get("http://localhost:3000/api/books");
+  const res = await axios.get(`${BASE_URL}/api/books`);
   if (res.status !== 200) {
     return new Error("Internal server error");
   }
@@ -23,7 +24,7 @@ export const getFeaturedBooks = async () => {
 };
 
 export const sendBook = async (data) => {
-  const res = await axios.post("http://localhost:3000/api/books", {
+  const res = await axios.post(`${BASE_URL}/api/books`, {
     title: data.title,
     author: data.author,
     imageUrl: data.imageUrl,
@@ -38,7 +39,7 @@ export const sendBook = async (data) => {
 };
 
 export const getBookById = async (id) => {
-  const res = await axios.get(`http://localhost:3000/api/book/${id}`);
+  const res = await axios.get(`${BASE_URL}/api/book/${id}`);
   if (res.status !== 200) {
     return new Error("Unable to fetch book from the given id.");
   }
@@ -47,7 +48,7 @@ export const getBookById = async (id) => {
 };
 
 export const updateBook = async (id, data) => {
-  const res = await axios.put(`http://localhost:3000/api/book/${id}`, {
+  const res = await axios.put(`${BASE_URL}/api/book/${id}`, {
     title: data.title,
     author: data.author,
     imageUrl: data.imageUrl,
@@ -62,10 +63,10 @@ export const updateBook = async (id, data) => {
 };
 
 export const deleteBook = async (id) => {
-  const res = await axios.delete(`http://localhost:3000/api/book/${id}`);
+  const res = await axios.delete(`${BASE_URL}/api/book/${id}`);
   if (res.status !== 200) {
     return new Error("Unable to delete book from the given id.");
   }
   const resData = await res.data;
-  return resData
+  return resData;
 };
